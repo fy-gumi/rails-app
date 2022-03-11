@@ -1,24 +1,25 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 環境構築手順
 
-Things you may want to cover:
+1. ファイルを作成
+下記コマンドを実行
 
-* Ruby version
+```
+touch {Dockerfile,docker-compose.yml,Gemfile,Gemfile.lock,.env,entrypoint.sh}
+```
 
-* System dependencies
+2. 以下の4ファイルを作成(各ファイルgithub上にあげているので、内容はコピーしてください)
+- Dockerfile
+- docker-compose.yml
+- Gemfile
+- entrypoint.sh
 
-* Configuration
+※ Gemfile.lockは空のまま
 
-* Database creation
+3. rails new でアプリ作成
+下記コマンドを実行
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+docker-compose run web rails new . --force --no-deps --database=mysql --webpacker
+```
