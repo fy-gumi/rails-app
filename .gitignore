@@ -36,3 +36,4 @@ yarn-debug.log*
 
 # Ignore vender files
 /vender/*
+vendor/cache
