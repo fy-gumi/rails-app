@@ -1,0 +1,22 @@
+<%= form_with(model: financial_planner) do |form| %>
+  <% if financial_planner.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(financial_planner.errors.count, "error") %> prohibited this financial_planner from being saved:</h2>
+
+      <ul>
+        <% financial_planner.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :financial_planner_name %>
+    <%= form.text_field :financial_planner_name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
