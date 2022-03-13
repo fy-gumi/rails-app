@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>ログイン画面</h1>
+<table>
+  <thead>
+    <tr>
+      <th>ユーザ</th>
+      <th></th>
+      <th>FP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% (0..([@users.size, @financial_planners.size].max-1)).each do |n| %>
+      <tr>
+        <td>
+            <% if defined? @users[n].user_name %>
+                <%= @users[n].user_name %>
+            <% end %>
+        </td>
+        <td></td>
+        <td>
+            <% if defined? @financial_planners[n].financial_planner_name %>
+                <%= @financial_planners[n].financial_planner_name %>
+            <% end %>
+        </td>
+      </tr>
+    <% end %>
+    <tr></tr>
+    <tr>
+        <td><%= link_to '新規ユーザ追加', new_user_path %></td>
+        <td></td>
+        <td><%= link_to '新規FP追加', new_financial_planner_path %></td>
+    </tr>
+  </tbody>
+</table>
+<br>
