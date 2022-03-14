@@ -14,7 +14,7 @@
       <tr>
         <td>
             <% if defined? @users[n].user_name %>
-                <%= @users[n].user_name %>
+                <%= link_to @users[n].user_name, user_path(@users[n].id), method: :post %>
             <% end %>
         </td>
         <td></td>
