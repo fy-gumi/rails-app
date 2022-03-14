@@ -32,7 +32,7 @@ module SessionsHelper
     def current_financial_planner
         if session[:financial_planner_id]
             # find だとFPがログインしていない場合に例外が発生するので find_by で検索
-            @current_financial_planner ||= financial_planner.find_by(id: session[:financial_planner_id])
+            @current_financial_planner ||= FinancialPlanner.find_by(id: session[:financial_planner_id])
         end
     end
 

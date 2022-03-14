@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   resources :users
 
   post   '/users/:id',  to: 'users#login'
+  post   '/financial_planners/:id',  to: 'financial_planners#login'
 
 end

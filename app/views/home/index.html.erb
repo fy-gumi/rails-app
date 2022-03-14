@@ -20,7 +20,7 @@
         <td></td>
         <td>
             <% if defined? @financial_planners[n].financial_planner_name %>
-                <%= @financial_planners[n].financial_planner_name %>
+                <%= link_to @financial_planners[n].financial_planner_name, financial_planner_path(@financial_planners[n].id), method: :post %>
             <% end %>
         </td>
       </tr>
