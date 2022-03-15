@@ -4,11 +4,11 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   root :to => 'home#index'
-  
+
   resources :financial_planners
   resources :users
 
+  get   '/user/home',  to: 'users#home'
   post   '/users/:id',  to: 'users#login'
   post   '/financial_planners/:id',  to: 'financial_planners#login'
-
 end
