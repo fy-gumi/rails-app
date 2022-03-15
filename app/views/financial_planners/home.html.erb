@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+<%= link_to "ログアウト", logout_path, method: :delete %>
+<h1>FPのログイン後ページ</h1>
+<%= @current_financial_planner.financial_planner_name %>
+<table>
+  <thead>
+    <tr>
+      <th>Financial planner name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @financial_planners.each do |financial_planner| %>
+      <tr>
+        <td><%= financial_planner.financial_planner_name %></td>
+        <td><%= link_to 'Show', financial_planner %></td>
+        <td><%= link_to 'Edit', edit_financial_planner_path(financial_planner) %></td>
+        <td><%= link_to 'Destroy', financial_planner, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Financial Planner', new_financial_planner_path %>
