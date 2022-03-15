@@ -10,12 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_13_131443) do
+ActiveRecord::Schema.define(version: 2022_03_15_130149) do
 
   create_table "financial_planners", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "financial_planner_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reserves", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "financial_planner_id", null: false
+    t.date "reserve_date"
+    t.integer "time_zone_code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["financial_planner_id"], name: "index_reserves_on_financial_planner_id"
+    t.index ["user_id"], name: "index_reserves_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -24,4 +35,6 @@ ActiveRecord::Schema.define(version: 2022_03_13_131443) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "reserves", "financial_planners"
+  add_foreign_key "reserves", "users"
 end

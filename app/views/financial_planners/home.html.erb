@@ -13,7 +13,7 @@
   <tbody>
     <% @financial_planners.each do |financial_planner| %>
       <tr>
-        <td><%= financial_planner.financial_planner_name %></td>
+        <td><%= financial_planner.id %> : <%= financial_planner.financial_planner_name %></td>
         <td><%= link_to 'Show', financial_planner %></td>
         <td><%= link_to 'Edit', edit_financial_planner_path(financial_planner) %></td>
         <td><%= link_to 'Destroy', financial_planner, method: :delete, data: { confirm: 'Are you sure?' } %></td>
