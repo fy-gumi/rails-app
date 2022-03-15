@@ -26,7 +26,9 @@ module SessionsHelper
 
     # 渡されたFPでログインする
     def financial_planner_log_in(financial_planner)
+        log_out
         session[:financial_planner_id] = financial_planner.id
+        current_financial_planner
     end
     
     # 現在ログイン中のFPを返す（いる場合）

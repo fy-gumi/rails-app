@@ -1,10 +1,15 @@
 class FinancialPlannersController < ApplicationController
   before_action :set_financial_planner, only: %i[ show edit update destroy login ]
-  before_action :logged_in_financial_planner, only: [:index]
+  before_action :logged_in_financial_planner, only: %i[index home]
 
   def login
     financial_planner_log_in @financial_planner
-    redirect_to financial_planners_url
+    redirect_to '/financial_planner/home'
+  end
+
+  def home
+    @financial_planners = FinancialPlanner.all
+    render "financial_planners/home"
   end
 
   # GET /financial_planners or /financial_planners.json

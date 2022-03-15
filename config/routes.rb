@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users
 
   get   '/user/home',  to: 'users#home'
+  get   '/financial_planner/home',  to: 'financial_planners#home'
   post   '/users/:id',  to: 'users#login'
   post   '/financial_planners/:id',  to: 'financial_planners#login'
 end
