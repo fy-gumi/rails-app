@@ -3,6 +3,7 @@ module SessionsHelper
     def user_log_in(user)
         log_out
         session[:user_id] = user.id
+        current_user
     end
     
     # 現在ログイン中のユーザーを返す（いる場合）
