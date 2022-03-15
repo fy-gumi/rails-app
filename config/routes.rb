@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reserves
   get    '/login',  to: 'sessions#new'
   post   '/login',  to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
@@ -10,6 +11,6 @@ Rails.application.routes.draw do
 
   get   '/user/home',  to: 'users#home'
   get   '/financial_planner/home',  to: 'financial_planners#home'
-  post   '/users/:id',  to: 'users#login'
-  post   '/financial_planners/:id',  to: 'financial_planners#login'
+  post  '/users/:id',  to: 'users#login'
+  post  '/financial_planners/:id',  to: 'financial_planners#login'
 end

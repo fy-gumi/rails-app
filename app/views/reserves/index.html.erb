@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Reserves</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Financial planner</th>
+      <th>Reserve date</th>
+      <th>Time zone code</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reserves.each do |reserf| %>
+      <tr>
+        <td><%= reserf.user_id %></td>
+        <td><%= reserf.financial_planner_id %></td>
+        <td><%= reserf.reserve_date %></td>
+        <td><%= reserf.time_zone_code %></td>
+        <td><%= link_to 'Show', reserf %></td>
+        <td><%= link_to 'Edit', edit_reserf_path(reserf) %></td>
+        <td><%= link_to 'Destroy', reserf, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Reserf', new_reserf_path %>
