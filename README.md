@@ -2,24 +2,24 @@
 
 ## 環境構築手順
 
-1. ファイルを作成
-下記コマンドを実行
+下記コマンドを実行していく
 
 ```
-touch {Dockerfile,docker-compose.yml,Gemfile,Gemfile.lock,.env,entrypoint.sh}
-```
+git clone git@github.com:fy-gumi/rails-app.git
 
-2. 以下の4ファイルを作成(各ファイルgithub上にあげているので、内容はコピーしてください)
-- Dockerfile
-- docker-compose.yml
-- Gemfile
-- entrypoint.sh
+cd rails-app
 
-※ Gemfile.lockは空のまま
-
-3. rails new でアプリ作成
-下記コマンドを実行
-
-```
 docker-compose run web rails new . --force --no-deps --database=mysql --webpacker
+
+docker-compose run web rake db:create
+
+docker-compose up -d --build
+
+docker-compose run web rails db:migrate
 ```
+
+## 内容
+FPが予約枠を作成しユーザが予約するシステムです。
+
+## 注意点
+- 不要なファイルや処理がかなりたくさん残っているため、想定していない挙動をする可能性があります。
