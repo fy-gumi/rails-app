@@ -1,27 +1,34 @@
 <p id="notice"><%= notice %></p>
 <%= link_to "ログアウト", logout_path, method: :delete %>
-<h1>FPのログイン後ページ</h1>
-<%= @current_financial_planner.financial_planner_name %>
+<h2>FPのログイン後ページ</h2>
+<h2><%= @current_financial_planner.financial_planner_name %>さんでログイン中</h2>
+<br>
 <table>
   <thead>
     <tr>
-      <th>Financial planner name</th>
-      <th colspan="3"></th>
+    <% (0..@day_count).each do |n| %>
+      <th><%= @today.since(n.days).strftime("%m/%d") %>(<%= Reserve::DAY_OF_WEEK[@today.since(n.days).wday] %>)</th>
+    <% end %>
     </tr>
   </thead>
 
   <tbody>
-    <% @financial_planners.each do |financial_planner| %>
+    <% (0..@reserve_list.size-1).each do |x| %>
       <tr>
-        <td><%= financial_planner.id %> : <%= financial_planner.financial_planner_name %></td>
-        <td><%= link_to 'Show', financial_planner %></td>
-        <td><%= link_to 'Edit', edit_financial_planner_path(financial_planner) %></td>
-        <td><%= link_to 'Destroy', financial_planner, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% (0..@reserve_list[x].size-1).each do |y| %>
+          <% if @reserve_list[x][y] == 0 %>
+            <td class="center-line lightgrey"><%= Reserve::TIME_ZONE[x] %></td>
+          <% elsif @reserve_list[x][y] == 1 %>
+            <td><%= link_to Reserve::TIME_ZONE[x], financial_planner_insert_path(reserve_date: y, time_zone_code: x), method: :post, class: "royalblue" %></td>
+          <% elsif @reserve_list[x][y] == 2 %>
+            <td class="darkgreen"><%= Reserve::TIME_ZONE[x] %></td>
+          <% else %>
+            <td class="deeppink"><%= Reserve::TIME_ZONE[x] %></td>  
+          <% end %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Financial Planner', new_financial_planner_path %>

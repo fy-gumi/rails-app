@@ -13,3 +13,23 @@
  *= require_tree .
  *= require_self
  */
+
+ .center-line {
+    text-decoration: line-through;
+}
+
+.deeppink {
+    color:#FF1493;
+}
+
+.royalblue:link, .royalblue:visited, .royalblue:hover, .royalblue:active {
+    color:#4169F1;
+}
+
+.darkgreen{
+    color:#080;
+}
+
+.lightgrey{
+    color:#D3D3D3;
+}

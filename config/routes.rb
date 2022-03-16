@@ -11,6 +11,10 @@ Rails.application.routes.draw do
 
   get   '/user/home',  to: 'users#home'
   get   '/financial_planner/home',  to: 'financial_planners#home'
+
+  post   '/user/reserve',  to: 'users#reserve'
+  post   '/financial_planner/insert',  to: 'financial_planners#insert'
+
   post  '/users/:id',  to: 'users#login'
   post  '/financial_planners/:id',  to: 'financial_planners#login'
 end

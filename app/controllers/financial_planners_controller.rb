@@ -1,6 +1,6 @@
 class FinancialPlannersController < ApplicationController
   before_action :set_financial_planner, only: %i[ show edit update destroy login ]
-  before_action :logged_in_financial_planner, only: %i[index home]
+  before_action :logged_in_financial_planner, only: %i[index home insert]
 
   def login
     financial_planner_log_in @financial_planner
@@ -8,8 +8,16 @@ class FinancialPlannersController < ApplicationController
   end
 
   def home
-    @financial_planners = FinancialPlanner.all
+    @today = Time.current
+    @day_count = 9
+    @reserve_list = financial_planner_reserve_list
+
     render "financial_planners/home"
+  end
+
+  def insert
+    Reserve.create(financial_planner_id: session[:financial_planner_id],reserve_date: Time.current.since(params[:reserve_date].to_i.days), time_zone_code: params[:time_zone_code])
+    redirect_to '/financial_planner/home'
   end
 
   # GET /financial_planners or /financial_planners.json
@@ -77,5 +85,34 @@ class FinancialPlannersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def financial_planner_params
       params.require(:financial_planner).permit(:financial_planner_name)
+    end
+
+    def financial_planner_reserve_list
+      reserved_list = Reserve.where(reserve_date: [@today..@today.since(@day_count.days)]).where(financial_planner_id: @current_financial_planner.id)
+
+      reserve_list = []
+      row = []
+
+      (0..Reserve::TIME_ZONE.size-1).each do |x|
+        (0..@day_count).each do |y|
+          if Reserve::RECEPTION_TIME_ZONE[@today.since(y.days).wday].include?(x)
+            row << 1
+          else
+            row << 0
+          end
+        end
+        reserve_list << row
+        row = []
+      end
+
+      reserved_list.each do |reserve|
+        diff_date = reserve.reserve_date - Date.today
+        if reserve.user_id
+          reserve_list[reserve.time_zone_code][diff_date] = 3
+        else
+          reserve_list[reserve.time_zone_code][diff_date] = 2
+        end
+      end
+      return reserve_list
     end
 end
