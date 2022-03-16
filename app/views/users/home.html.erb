@@ -1,27 +1,32 @@
 <p id="notice"><%= notice %></p>
 <%= link_to "ログアウト", logout_path, method: :delete %>
-<h1>ユーザのログイン後ページ</h1>
-<%= @current_user.user_name %>
+<h2>ユーザのログイン後ページ</h1>
+<h2><%= @current_user.user_name %>さんでログイン中</h2>
+<br>
 <table>
   <thead>
     <tr>
-      <th>User name</th>
-      <th colspan="3"></th>
+      <% (0..@day_count).each do |n| %>
+        <th><%= @today.since(n.days).strftime("%m/%d") %>(<%= Reserve::DAY_OF_WEEK[@today.since(n.days).wday] %>)</th>
+      <% end %>
     </tr>
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
+    <% (0..@reserve_list.size-1).each do |x| %>
       <tr>
-        <td><%= user.user_name %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% (0..@reserve_list[x].size-1).each do |y| %>
+          <% if @reserve_list[x][y] == 0 %>
+            <td class="center-line lightgrey"><%= Reserve::TIME_ZONE[x] %></td>
+          <% elsif @reserve_list[x][y] == 2 %>
+            <td><%= link_to Reserve::TIME_ZONE[x], user_reserve_path(reserve_date: y, time_zone_code: x), method: :post, class: "royalblue" %></td>
+          <% else %>
+            <td class="deeppink"><%= Reserve::TIME_ZONE[x] %></td>  
+          <% end %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New User', new_user_path %>

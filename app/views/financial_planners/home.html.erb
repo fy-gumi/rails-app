@@ -19,7 +19,7 @@
           <% if @reserve_list[x][y] == 0 %>
             <td class="center-line lightgrey"><%= Reserve::TIME_ZONE[x] %></td>
           <% elsif @reserve_list[x][y] == 1 %>
-            <td class="royalblue"><%= link_to Reserve::TIME_ZONE[x], financial_planner_insert_path(reserve_date: y, time_zone_code: x), method: :post %></td>
+            <td><%= link_to Reserve::TIME_ZONE[x], financial_planner_insert_path(reserve_date: y, time_zone_code: x), method: :post, class: "royalblue" %></td>
           <% elsif @reserve_list[x][y] == 2 %>
             <td class="darkgreen"><%= Reserve::TIME_ZONE[x] %></td>
           <% else %>

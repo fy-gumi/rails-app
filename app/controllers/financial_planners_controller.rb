@@ -10,7 +10,7 @@ class FinancialPlannersController < ApplicationController
   def home
     @today = Time.current
     @day_count = 9
-    @reserve_list = financial_planner_Reserve_list
+    @reserve_list = financial_planner_reserve_list
 
     render "financial_planners/home"
   end
@@ -87,7 +87,7 @@ class FinancialPlannersController < ApplicationController
       params.require(:financial_planner).permit(:financial_planner_name)
     end
 
-    def financial_planner_Reserve_list
+    def financial_planner_reserve_list
       reserved_list = Reserve.where(reserve_date: [@today..@today.since(@day_count.days)]).where(financial_planner_id: @current_financial_planner.id)
 
       reserve_list = []

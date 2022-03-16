@@ -22,7 +22,7 @@
     color:#FF1493;
 }
 
-.royalblue {
+.royalblue:link, .royalblue:visited, .royalblue:hover, .royalblue:active {
     color:#4169F1;
 }
 
